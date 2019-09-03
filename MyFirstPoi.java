@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -35,19 +37,34 @@ public class MyFirstPoi {
 			int rowNum = 0; //row number
 			int cellNum = 0; //cell number
 			
+			//Set Column width
+			sheet.setColumnWidth(0, 5000);
+			sheet.setColumnWidth(1, 5000);
+			
+			//Bold
+			XSSFFont headerCellFont = workbook.createFont();
+			headerCellFont.setBold(true);
+			
+			XSSFCellStyle cs = null;
+			cs = workbook.createCellStyle();
+			cs.setFont(headerCellFont);
+			
+						
 			Row rowOne = sheet.createRow(rowNum);
 			Cell cellOneRowOne = rowOne.createCell(cellNum);
+			cellOneRowOne.setCellStyle(cs);
 			cellOneRowOne.setCellValue("My First Row, First Cell Value");
 			
 			cellNum++;
 			Cell cellTwoRowOne = rowOne.createCell(cellNum);
+			cellTwoRowOne.setCellStyle(cs);
 			cellTwoRowOne.setCellValue("My First Row, Second Cell Value");
 		
 			
 			//reset cell no.
 			cellNum = 0;
 			rowNum++;//Second row
-			
+						
 			Row rowTwo = sheet.createRow(rowNum);
 			Cell cellOneRowTwo = rowTwo.createCell(cellNum);
 			cellOneRowTwo.setCellValue("My Second Row, First Cell Value");
